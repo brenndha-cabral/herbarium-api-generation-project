@@ -15,18 +15,18 @@ export class CategoryService {
   }
 
   async findCategoryById(id: number): Promise<CategoryEntity> {
-    const departamento = await this.categoryRepository.findOne({
+    const category = await this.categoryRepository.findOne({
       where: {
         id,
       },
     });
 
-    if (!departamento)
+    if (!category)
       throw new HttpException(
         'Categoria não encontrada.',
         HttpStatus.NOT_FOUND,
       );
-    return departamento;
+    return category;
   }
 
   async findAllByCategory(category: string): Promise<CategoryEntity[]> {
