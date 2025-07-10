@@ -3,10 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-// import { Funcionario } from '../../funcionario/entities/funcionario.entity';
+import { ProductEntity } from '../../product/entities/product.entities';
 
 @Entity({ name: 'tb_category' })
 export class CategoryEntity {
@@ -27,6 +28,6 @@ export class CategoryEntity {
   @UpdateDateColumn()
   update_at: Date;
 
-  // @OneToMany(() => Funcionario, (funcionario) => funcionario.departamento)
-  // funcionario: Funcionario[]
+  @OneToMany(() => ProductEntity, (product) => product.category)
+  product: ProductEntity[];
 }
