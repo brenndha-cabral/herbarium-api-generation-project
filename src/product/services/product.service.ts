@@ -11,14 +11,13 @@ export class ProductService {
   ) {}
 
   async findAllProducts(): Promise<ProductEntity[]> {
-    return await this.productRepository.find();
+    return await this.productRepository.find({ relations: { category: true } });
   }
 
   async findProductById(id: number): Promise<ProductEntity> {
     const product = await this.productRepository.findOne({
-      where: {
-        id,
-      },
+      where: { id },
+      relations: { category: true },
     });
 
     if (!product)
@@ -31,6 +30,7 @@ export class ProductService {
       where: {
         name: ILike(`%${product}%`),
       },
+      relations: { category: true },
     });
   }
 
